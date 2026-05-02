@@ -48,7 +48,7 @@ export default function Home() {
           </motion.h1>
           <motion.p 
             variants={fadeUpVariant}
-            className="text-lg md:text-2xl font-serif text-[#E8DCCB]/80 tracking-widest uppercase"
+            className="text-lg md:text-2xl font-serif text-[#E8DCCB]/80 tracking-widest"
             data-testid="text-hero-tagline"
           >
             dreamers are welcome
@@ -174,7 +174,7 @@ export default function Home() {
       <footer className="w-full py-16 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 text-primary">
         <div className="flex flex-col items-center md:items-start gap-2">
           <span className="text-2xl font-serif" data-testid="text-footer-brand">da vinci</span>
-          <span className="text-xs tracking-[0.2em] uppercase opacity-60">dreamers are welcome</span>
+          <span className="text-xs tracking-[0.2em] opacity-60">dreamers are welcome</span>
         </div>
         <div className="flex gap-8 text-sm opacity-80 hover:[&>a]:opacity-100 [&>a]:transition-opacity">
           <a href="#" data-testid="link-locations">Locations</a>
