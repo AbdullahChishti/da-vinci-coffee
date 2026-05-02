@@ -96,8 +96,8 @@ export default function Home() {
             <div className="w-1.5 h-1.5 rounded-full bg-[#c8841a]/60" />
             <div className="w-8 h-px bg-[#c8841a]/50" />
           </div>
-          <p className="text-base md:text-xl font-serif font-light text-[#E8DCCB]/55 tracking-[0.18em]">
-            Measured.&ensp;Observed.&ensp;Balanced.
+          <p className="text-base md:text-xl font-serif font-light text-[#E8DCCB]/55 leading-relaxed max-w-xl mx-auto">
+            Not just the finest coffee —<br className="hidden md:block" /> the one that feels like it was made for you.
           </p>
         </motion.div>
       </section>
