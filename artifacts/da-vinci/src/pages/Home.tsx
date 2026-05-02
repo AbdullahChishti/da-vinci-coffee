@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import vitruvianMan from "../assets/vitruvian-man.png";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 30 },
@@ -124,13 +123,6 @@ export default function Home() {
           <source src="/experience-video.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/20 z-10" />
-        <img
-          src={vitruvianMan}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-contain z-20 opacity-[0.06] pointer-events-none select-none"
-          data-testid="img-vitruvian-experience"
-        />
         
         <motion.div 
           className="relative z-20 flex flex-col items-center text-center px-4 mt-auto mb-32"
