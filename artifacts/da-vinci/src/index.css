@@ -61,58 +61,59 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* LIGHT MODE */
+/* BASE (DARK ESPRESSO) */
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
+  --button-outline: rgba(255,255,255, .08);
+  --badge-outline: rgba(255,255,255, .04);
 
-  --opaque-button-border-intensity: -8;
+  --opaque-button-border-intensity: 9;
 
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
+  --elevate-1: rgba(255,255,255, .03);
+  --elevate-2: rgba(255,255,255, .07);
 
+  /* Deep Espresso: #1a1008 -> 20 40% 8% */
   /* Cream/Parchment: #E8DCCB -> 35 33% 85% */
-  /* Deep Espresso: #3A2F2A -> 19 16% 20% */
+  /* Amber accent: #c8841a -> 35 75% 45% */
 
-  --background: 35 33% 85%;
-  --foreground: 19 16% 20%;
+  --background: 20 35% 8%;
+  --foreground: 35 33% 85%;
 
-  --border: 35 20% 75%;
+  --border: 20 20% 18%;
 
-  --card: 35 33% 88%;
-  --card-foreground: 19 16% 20%;
-  --card-border: 35 20% 75%;
+  --card: 20 30% 11%;
+  --card-foreground: 35 33% 85%;
+  --card-border: 20 20% 18%;
 
-  --sidebar: 35 33% 85%;
-  --sidebar-foreground: 19 16% 20%;
-  --sidebar-border: 35 20% 75%;
-  --sidebar-primary: 19 16% 20%;
-  --sidebar-primary-foreground: 35 33% 85%;
-  --sidebar-accent: 35 33% 80%;
-  --sidebar-accent-foreground: 19 16% 20%;
-  --sidebar-ring: 19 16% 20%;
+  --sidebar: 20 35% 8%;
+  --sidebar-foreground: 35 33% 85%;
+  --sidebar-border: 20 20% 18%;
+  --sidebar-primary: 35 33% 85%;
+  --sidebar-primary-foreground: 20 35% 8%;
+  --sidebar-accent: 20 25% 15%;
+  --sidebar-accent-foreground: 35 33% 85%;
+  --sidebar-ring: 35 33% 85%;
 
-  --popover: 35 33% 85%;
-  --popover-foreground: 19 16% 20%;
-  --popover-border: 35 20% 75%;
+  --popover: 20 30% 11%;
+  --popover-foreground: 35 33% 85%;
+  --popover-border: 20 20% 18%;
 
-  --primary: 19 16% 20%;
-  --primary-foreground: 35 33% 85%;
+  --primary: 35 33% 85%;
+  --primary-foreground: 20 35% 8%;
 
-  --secondary: 35 25% 75%;
-  --secondary-foreground: 19 16% 20%;
+  --secondary: 20 25% 16%;
+  --secondary-foreground: 35 33% 85%;
 
-  --muted: 35 20% 80%;
-  --muted-foreground: 19 16% 40%;
+  --muted: 20 25% 14%;
+  --muted-foreground: 35 20% 58%;
 
-  --accent: 35 33% 80%;
-  --accent-foreground: 19 16% 20%;
+  --accent: 35 65% 45%;
+  --accent-foreground: 20 35% 8%;
 
-  --destructive: 0 84% 60%;
+  --destructive: 0 62% 40%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 35 20% 75%;
-  --ring: 19 16% 20%;
+  --input: 20 20% 18%;
+  --ring: 35 33% 85%;
 
   --app-font-sans: 'Playfair Display', serif;
   --app-font-serif: 'Playfair Display', serif;
@@ -120,14 +121,14 @@
   
   --radius: 0rem;
   
-  --shadow-2xs: 0px 2px 0px 0px rgba(58, 47, 42, 0.05);
-  --shadow-xs: 0px 2px 0px 0px rgba(58, 47, 42, 0.05);
-  --shadow-sm: 0px 2px 0px 0px rgba(58, 47, 42, 0.05), 0px 1px 2px -1px rgba(58, 47, 42, 0.05);
-  --shadow: 0px 2px 0px 0px rgba(58, 47, 42, 0.05), 0px 1px 2px -1px rgba(58, 47, 42, 0.05);
-  --shadow-md: 0px 2px 0px 0px rgba(58, 47, 42, 0.05), 0px 2px 4px -1px rgba(58, 47, 42, 0.05);
-  --shadow-lg: 0px 2px 0px 0px rgba(58, 47, 42, 0.05), 0px 4px 6px -1px rgba(58, 47, 42, 0.05);
-  --shadow-xl: 0px 2px 0px 0px rgba(58, 47, 42, 0.05), 0px 8px 10px -1px rgba(58, 47, 42, 0.05);
-  --shadow-2xl: 0px 2px 0px 0px rgba(58, 47, 42, 0.05);
+  --shadow-2xs: 0px 2px 0px 0px rgba(0, 0, 0, 0.3);
+  --shadow-xs: 0px 2px 0px 0px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 8px 10px -1px rgba(0, 0, 0, 0.3);
+  --shadow-2xl: 0px 2px 0px 0px rgba(0, 0, 0, 0.3);
   
   --tracking-normal: 0em;
   --spacing: 0.25rem;

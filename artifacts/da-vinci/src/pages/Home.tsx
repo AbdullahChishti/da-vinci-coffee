@@ -103,8 +103,14 @@ export default function Home() {
       </section>
 
       {/* 3. COFFEE */}
-      <section className="w-full py-24 md:py-32 px-6 md:px-12 bg-[#E1D4C2]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <section
+        className="relative w-full py-24 md:py-32 px-6 md:px-12 overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #241608 0%, #2e1e0e 60%, #1e1208 100%)" }}
+      >
+        {/* Amber glow — top right */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.07] pointer-events-none"
+          style={{ background: "radial-gradient(circle, #c8841a 0%, transparent 70%)" }} />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -112,11 +118,11 @@ export default function Home() {
             variants={fadeUpVariant}
             className="order-2 md:order-1"
           >
-            <h2 className="text-sm tracking-[0.3em] uppercase text-primary/60 mb-8" data-testid="text-coffee-subtitle">The Source</h2>
-            <p className="text-2xl md:text-4xl font-serif leading-relaxed text-primary mb-12">
+            <h2 className="text-xs tracking-[0.4em] uppercase text-[#c8841a]/70 mb-8 font-sans" data-testid="text-coffee-subtitle">The Source</h2>
+            <p className="text-2xl md:text-4xl font-serif leading-relaxed text-[#E8DCCB] mb-12" style={{ letterSpacing: "-0.01em" }}>
               Sourced with intellect.<br/>Roasted with intuition.<br/>Brewed with precision.
             </p>
-            <p className="text-lg text-primary/80 leading-loose max-w-lg">
+            <p className="text-base text-[#E8DCCB]/55 leading-loose max-w-lg font-serif font-light">
               We approach each bean as a raw material demanding understanding before transformation. No rush. No excess. Just the essential notes drawn out through careful study.
             </p>
           </motion.div>
@@ -125,7 +131,8 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUpVariant}
-            className="order-1 md:order-2 w-full aspect-[3/4] relative overflow-hidden bg-primary/5"
+            className="order-1 md:order-2 w-full aspect-[3/4] relative overflow-hidden"
+            style={{ boxShadow: "0 0 80px rgba(0,0,0,0.6)" }}
           >
             <img 
               src="/coffee-image.png" 
@@ -134,6 +141,7 @@ export default function Home() {
               loading="lazy"
               data-testid="img-coffee"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
           </motion.div>
         </div>
       </section>
@@ -166,31 +174,51 @@ export default function Home() {
       </section>
 
       {/* 5. THE STUDY */}
-      <section className="w-full py-32 md:py-48 px-6 flex flex-col items-center justify-center border-b border-primary/10">
+      <section
+        className="relative w-full py-32 md:py-48 px-6 flex flex-col items-center justify-center overflow-hidden"
+        style={{ background: "linear-gradient(180deg, #1a1008 0%, #201408 100%)" }}
+      >
+        {/* Centered amber bloom */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[700px] h-[700px] rounded-full opacity-[0.06]"
+            style={{ background: "radial-gradient(circle, #c8841a 0%, transparent 65%)" }} />
+        </div>
         <motion.div 
-          className="max-w-2xl mx-auto text-center"
+          className="relative z-10 max-w-2xl mx-auto text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
+          <motion.p
+            variants={fadeUpVariant}
+            className="text-xs tracking-[0.45em] uppercase text-[#c8841a]/60 mb-10 font-sans"
+          >
+            loyalty
+          </motion.p>
           <motion.h3 
             variants={fadeUpVariant}
-            className="text-2xl md:text-4xl font-serif text-primary mb-8"
+            className="text-3xl md:text-5xl font-serif text-[#E8DCCB] font-light mb-6"
             data-testid="text-study-title"
+            style={{ letterSpacing: "-0.01em" }}
           >
             The Study
           </motion.h3>
+          <div className="flex items-center justify-center gap-4 mb-10">
+            <div className="w-8 h-px bg-[#c8841a]/40" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#c8841a]/50" />
+            <div className="w-8 h-px bg-[#c8841a]/40" />
+          </div>
           <motion.p 
             variants={fadeUpVariant}
-            className="text-lg md:text-xl text-primary/70 mb-12"
+            className="text-lg md:text-xl font-serif font-light text-[#E8DCCB]/50 mb-14 tracking-wide"
             data-testid="text-study-body"
           >
             Complete 7 studies. Unlock a creation.
           </motion.p>
           <motion.button 
             variants={fadeUpVariant}
-            className="px-12 py-4 border border-primary text-primary hover:bg-primary hover:text-background transition-colors duration-500 font-serif tracking-widest text-sm uppercase"
+            className="px-14 py-4 border border-[#E8DCCB]/30 text-[#E8DCCB]/70 hover:border-[#E8DCCB] hover:text-[#E8DCCB] transition-all duration-500 font-serif tracking-[0.3em] text-xs uppercase"
             data-testid="button-join-study"
           >
             Begin
@@ -199,12 +227,15 @@ export default function Home() {
       </section>
 
       {/* 6. FOOTER */}
-      <footer className="w-full py-16 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 text-primary">
+      <footer
+        className="w-full py-14 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8"
+        style={{ background: "#120d06", borderTop: "1px solid rgba(232,220,203,0.08)" }}
+      >
         <div className="flex flex-col items-center md:items-start gap-2">
-          <span className="text-2xl font-serif" data-testid="text-footer-brand">da vinci</span>
-          <span className="text-xs tracking-[0.2em] opacity-60">dreamers are welcome</span>
+          <span className="text-xl font-serif text-[#E8DCCB]/80" data-testid="text-footer-brand">da vinci</span>
+          <span className="text-xs tracking-[0.25em] text-[#E8DCCB]/30">dreamers are welcome</span>
         </div>
-        <div className="flex gap-8 text-sm opacity-80 hover:[&>a]:opacity-100 [&>a]:transition-opacity">
+        <div className="flex gap-8 text-xs tracking-[0.2em] uppercase text-[#E8DCCB]/30 hover:[&>a]:text-[#E8DCCB]/70 [&>a]:transition-colors [&>a]:duration-300">
           <a href="#" data-testid="link-locations">Locations</a>
           <a href="#" data-testid="link-journal">Journal</a>
           <a href="#" data-testid="link-contact">Contact</a>
