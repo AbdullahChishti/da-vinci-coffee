@@ -40,13 +40,6 @@ export default function Home() {
           initial="hidden"
           animate="visible"
         >
-          <motion.img
-            variants={fadeUpVariant}
-            src={vitruvianMan}
-            alt="Vitruvian Man"
-            className="w-24 md:w-32 lg:w-40 mb-8 opacity-70"
-            data-testid="img-vitruvian-hero"
-          />
           <motion.h1 
             variants={fadeUpVariant}
             className="text-6xl md:text-8xl lg:text-[10rem] font-serif tracking-tight text-[#E8DCCB] font-light mb-6"
@@ -131,6 +124,13 @@ export default function Home() {
           <source src="/experience-video.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/20 z-10" />
+        <img
+          src={vitruvianMan}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-contain z-20 opacity-[0.06] pointer-events-none select-none"
+          data-testid="img-vitruvian-experience"
+        />
         
         <motion.div 
           className="relative z-20 flex flex-col items-center text-center px-4 mt-auto mb-32"
@@ -181,10 +181,7 @@ export default function Home() {
       {/* 6. FOOTER */}
       <footer className="w-full py-16 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 text-primary">
         <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="flex items-center gap-3">
-            <img src={vitruvianMan} alt="Vitruvian Man" className="w-7 opacity-50" data-testid="img-vitruvian-footer" />
-            <span className="text-2xl font-serif" data-testid="text-footer-brand">da vinci</span>
-          </div>
+          <span className="text-2xl font-serif" data-testid="text-footer-brand">da vinci</span>
           <span className="text-xs tracking-[0.2em] opacity-60">dreamers are welcome</span>
         </div>
         <div className="flex gap-8 text-sm opacity-80 hover:[&>a]:opacity-100 [&>a]:transition-opacity">
