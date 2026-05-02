@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import conceptBg from "../assets/concept-bg.png";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 30 },
@@ -57,19 +58,33 @@ export default function Home() {
       </section>
 
       {/* 2. CONCEPT */}
-      <section className="w-full py-32 md:py-48 px-6 md:px-12 flex items-center justify-center">
-        <motion.div 
-          className="max-w-4xl mx-auto text-center"
+      <section className="relative w-full min-h-[70vh] flex items-center justify-center overflow-hidden">
+        <img
+          src={conceptBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#E8DCCB]/70" />
+        <motion.div
+          className="relative z-10 max-w-3xl mx-auto text-center px-6 md:px-12 py-32 md:py-48"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUpVariant}
         >
-          <p 
-            className="text-3xl md:text-5xl lg:text-6xl font-serif font-light leading-tight tracking-wide text-primary"
+          <p className="text-sm tracking-[0.3em] uppercase text-primary/50 mb-10 font-sans">
+            our philosophy
+          </p>
+          <p
+            className="text-3xl md:text-5xl lg:text-6xl font-serif font-light leading-[1.3] tracking-wide text-primary"
             data-testid="text-concept"
           >
-            A quiet space for coffee.<br/>Measured. Observed. Balanced.
+            A quiet space<br className="hidden md:block" /> for coffee.
+          </p>
+          <div className="w-12 h-px bg-primary/30 mx-auto my-10" />
+          <p className="text-lg md:text-2xl font-serif font-light text-primary/70 tracking-widest">
+            Measured. Observed. Balanced.
           </p>
         </motion.div>
       </section>
