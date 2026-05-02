@@ -1,0 +1,115 @@
+Create a minimal, modern, full-screen website for a specialty coffee brand called "da vinci".
+
+Goal:
+A calm, premium website with subtle cinematic video — not flashy, not busy.
+
+Style:
+- Warm neutral palette (#E8DCCB, #3A2F2A, wood tones)
+- Elegant serif typography (Playfair Display)
+- Clean layout, lots of whitespace
+- Soft shadows, subtle textures
+- Editorial / luxury aesthetic
+
+IMPORTANT:
+Use video only in key sections. Keep it subtle, slow, and muted.
+No autoplay sound.
+
+---
+
+Structure:
+
+1. Hero Section (VIDEO BACKGROUND)
+- Full-screen video (looped, muted)
+- Content of video:
+  slow espresso extraction OR soft café interior light
+
+- Overlay text (centered):
+
+  da vinci
+  art meets reason
+
+- Slight dark overlay for readability
+- Smooth fade-in on load
+
+---
+
+2. Concept Section (NO VIDEO)
+- Static section
+- Clean text:
+
+  “A quiet space for coffee.
+   Measured. Observed. Balanced.”
+
+- Large spacing, minimal design
+
+---
+
+3. Coffee Section (SUBTLE VIDEO OR STATIC)
+- Either:
+  - short loop of coffee pouring OR
+  - static minimal layout
+
+- Keep video small or background-only
+- Do NOT distract from content
+
+---
+
+4. Experience Section (VIDEO FEATURE)
+- Background video:
+  tray ritual (cup placement, water glass, slow motion)
+
+- Overlay text:
+  “Placed, not dropped.”
+
+- Text aligned left or center
+
+---
+
+5. Loyalty Section (STATIC)
+- Title: “The Study”
+- Minimal text:
+  “Complete 7 studies. Unlock a creation.”
+
+---
+
+6. Footer (STATIC)
+- Simple layout
+- No video
+
+---
+
+Video Rules:
+- Slow motion only
+- Warm color grading
+- Muted, looped, seamless
+- Use <video> tag with:
+  autoplay, muted, loop, playsinline
+
+---
+
+Interactions:
+- Smooth scroll
+- Soft fade-in animations
+- No aggressive motion
+- No parallax overload
+
+---
+
+Technical:
+- HTML, CSS, JavaScript (or React)
+- Fully responsive
+- Optimize video loading (low file size)
+- Lazy load videos below the fold
+
+---
+
+Avoid:
+- Multiple videos on screen at once
+- Bright colors
+- Fast cuts
+- Overly commercial feel
+
+---
+
+Goal:
+Make the website feel calm, immersive, and cinematic — like stepping into the café.

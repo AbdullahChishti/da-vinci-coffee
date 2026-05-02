@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "cgPwAXKp5qnTleFkhgO-S"
+uri = "file://artifacts/da-vinci/public/coffee-image.png"
+type = "image"
+title = "luxury coffee still life"
