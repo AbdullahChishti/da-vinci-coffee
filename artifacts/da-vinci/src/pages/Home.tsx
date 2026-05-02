@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import conceptBg from "../assets/concept-bg.png";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 30 },
@@ -58,33 +57,47 @@ export default function Home() {
       </section>
 
       {/* 2. CONCEPT */}
-      <section className="relative w-full min-h-[70vh] flex items-center justify-center overflow-hidden">
-        <img
-          src={conceptBg}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
+      <section
+        className="relative w-full min-h-[90vh] flex items-center justify-center overflow-hidden"
+        style={{ background: "linear-gradient(160deg, #1e1410 0%, #2e2018 45%, #3a2a1c 100%)" }}
+      >
+        {/* Subtle noise texture overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            backgroundSize: "200px",
+          }}
         />
-        <div className="absolute inset-0 bg-[#E8DCCB]/70" />
+        {/* Warm amber glow — bottom left */}
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full opacity-10 pointer-events-none"
+          style={{ background: "radial-gradient(circle, #c8841a 0%, transparent 70%)" }} />
+
         <motion.div
-          className="relative z-10 max-w-3xl mx-auto text-center px-6 md:px-12 py-32 md:py-48"
+          className="relative z-10 max-w-3xl mx-auto text-center px-8 md:px-16 py-36 md:py-52"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={fadeUpVariant}
         >
-          <p className="text-sm tracking-[0.3em] uppercase text-primary/50 mb-10 font-sans">
+          <p className="text-xs tracking-[0.45em] uppercase text-[#E8DCCB]/30 mb-12 font-sans">
             our philosophy
           </p>
           <p
-            className="text-3xl md:text-5xl lg:text-6xl font-serif font-light leading-[1.3] tracking-wide text-primary"
+            className="text-4xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.25] text-[#E8DCCB]"
             data-testid="text-concept"
+            style={{ letterSpacing: "-0.01em" }}
           >
-            A quiet space<br className="hidden md:block" /> for coffee.
+            A quiet space<br /> for coffee.
           </p>
-          <div className="w-12 h-px bg-primary/30 mx-auto my-10" />
-          <p className="text-lg md:text-2xl font-serif font-light text-primary/70 tracking-widest">
-            Measured. Observed. Balanced.
+          <div className="flex items-center justify-center gap-4 my-12">
+            <div className="w-8 h-px bg-[#c8841a]/50" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#c8841a]/60" />
+            <div className="w-8 h-px bg-[#c8841a]/50" />
+          </div>
+          <p className="text-base md:text-xl font-serif font-light text-[#E8DCCB]/55 tracking-[0.18em]">
+            Measured.&ensp;Observed.&ensp;Balanced.
           </p>
         </motion.div>
       </section>
