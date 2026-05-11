@@ -47,3 +47,7 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Secrets (e.g. Cloudflare API token for `pnpm run deploy:pages`)
+.env
+.env.*.local

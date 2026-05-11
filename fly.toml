@@ -1,0 +1,35 @@
+# Fly.io: https://fly.io/docs/reference/configuration/
+# 1. fly launch --no-deploy (merge if you already have an app name)
+# 2. fly secrets set DATABASE_URL="postgresql://..."
+# 3. fly certs add drinkdavinci.com && fly certs add www.drinkdavinci.com
+# 4. At your DNS: A/AAAA to Fly IPs, or CNAME to <app>.fly.dev (see fly certs show)
+# 5. fly deploy
+
+app = "drink-davinci"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.checks]]
+  interval = "30s"
+  timeout = "5s"
+  grace_period = "10s"
+  method = "GET"
+  path = "/api/healthz"
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1

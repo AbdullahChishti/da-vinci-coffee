@@ -1,0 +1,5 @@
+# Cloudflare Pages — build output for the da-vinci Vite app (monorepo).
+# Build command is set in the Pages project (see below). V2 build image recommended.
+name = "da-vinci-coffee"
+pages_build_output_dir = "artifacts/da-vinci/dist/public"
+compatibility_date = "2025-05-01"

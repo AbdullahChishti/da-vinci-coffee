@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build as esbuild } from "esbuild";
 import esbuildPluginPino from "esbuild-plugin-pino";
-import { rm } from "node:fs/promises";
+import { cp, rm } from "node:fs/promises";
 
 // Plugins (e.g. 'esbuild-plugin-pino') may use `require` to resolve dependencies
 globalThis.require = createRequire(import.meta.url);
@@ -118,6 +118,21 @@ globalThis.__dirname = __bannerPath.dirname(globalThis.__filename);
     `,
     },
   });
+
+  const daVinciPublic = path.resolve(artifactDir, "..", "da-vinci", "dist", "public");
+  const destPublic = path.resolve(distDir, "public");
+  try {
+    await cp(daVinciPublic, destPublic, { recursive: true });
+    console.info("Copied da-vinci frontend to api-server dist/public");
+  } catch (err) {
+    if (err && typeof err === "object" && "code" in err && err.code === "ENOENT") {
+      console.warn(
+        "da-vinci/dist/public not found; API will serve JSON only until you run: pnpm --filter @workspace/da-vinci run build",
+      );
+    } else {
+      throw err;
+    }
+  }
 }
 
 buildAll().catch((err) => {
