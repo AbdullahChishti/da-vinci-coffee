@@ -1,0 +1,427 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">Da Vinci Coffee | Design Philosophy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&amp;family=IM+Fell+English:ital@0;1&amp;display=swap" rel="stylesheet" vid="7">
+    
+    <style vid="8">
+        :root {
+            
+            
+            --color-ink: #2C2825; 
+            --color-rust: #9A4631; 
+            --color-rust-dim: #9A463180;
+            --color-sky-pale: #EBF3F5;
+            --color-paper: #F7F5F0;
+            --color-olive: #5D6650;
+            
+            --font-display: 'IM Fell English', serif;
+            --font-body: 'Cormorant Garamond', serif;
+            
+            --spacing-unit: 8px;
+            --layout-width: 720px;
+            
+            --ease-nature: cubic-bezier(0.45, 0, 0.55, 1); 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-paper);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            font-size: 22px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: default; 
+        }
+
+        
+        .atmosphere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(235, 243, 245, 1) 0%, rgba(235, 243, 245, 0) 40%),
+                radial-gradient(circle at 90% 80%, rgba(245, 241, 234, 1) 0%, rgba(245, 241, 234, 0) 50%),
+                linear-gradient(180deg, #E6ECEE 0%, #F4F1EB 100%);
+            filter: contrast(110%) brightness(105%);
+        }
+
+        
+        .texture-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            opacity: 0.4;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: multiply;
+        }
+
+        
+        main {
+            max-width: var(--layout-width);
+            margin: 0 auto;
+            padding: 120px 24px 200px;
+            position: relative;
+        }
+
+        
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            color: var(--color-rust); 
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 160px;
+            opacity: 0;
+            animation: fadeIn 2s var(--ease-nature) forwards;
+        }
+
+        .brand-title {
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: var(--color-ink);
+        }
+
+        .page-title {
+            font-size: 4rem;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .manifesto-intro {
+            font-size: 1.6rem;
+            line-height: 1.4;
+            text-align: center;
+            margin-bottom: 120px;
+            color: var(--color-olive); 
+            opacity: 0;
+            animation: fadeIn 2s var(--ease-nature) 0.5s forwards;
+        }
+
+        
+        section {
+            margin-bottom: 180px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s var(--ease-nature), transform 1.2s var(--ease-nature);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: rgba(140, 74, 50, 0.15); 
+            position: absolute;
+            left: -80px;
+            top: -20px;
+            user-select: none;
+            z-index: -1;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--color-olive);
+            border-left: 1px solid var(--color-rust);
+            padding-left: 16px;
+        }
+
+        .content-block {
+            font-size: 1.35rem;
+            color: var(--color-ink);
+        }
+
+        .content-block p {
+            margin-bottom: 24px;
+        }
+
+        .list-clean {
+            list-style: none;
+            margin: 32px 0;
+            padding-left: 24px;
+        }
+
+        .list-clean li {
+            position: relative;
+            margin-bottom: 12px;
+            padding-left: 24px;
+        }
+
+        .list-clean li::before {
+            content: "—"; 
+            position: absolute;
+            left: -10px;
+            color: var(--color-rust);
+        }
+
+        
+        .emphasis-block {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            border-top: 1px solid rgba(140, 74, 50, 0.2);
+            border-bottom: 1px solid rgba(140, 74, 50, 0.2);
+        }
+        
+        .emphasis-block p {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--color-rust);
+        }
+
+        
+        footer {
+            text-align: center;
+            padding-bottom: 80px;
+            margin-top: 120px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-rust);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .footer-tagline {
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-olive);
+        }
+
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        
+        @media (max-width: 800px) {
+            :root {
+                --layout-width: 100%;
+            }
+            .section-number {
+                position: relative;
+                left: 0;
+                top: 0;
+                font-size: 3rem;
+                display: block;
+                margin-bottom: 16px;
+            }
+            .section-subtitle {
+                border-left: none;
+                padding-left: 0;
+                margin-bottom: 24px;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body vid="9">
+
+    <div class="atmosphere" vid="10"></div>
+    <div class="texture-overlay" vid="11"></div>
+
+    <main vid="12">
+        <header class="brand-header" vid="13">
+            <div class="brand-title" vid="14">Da Vinci Coffee</div>
+            <h1 class="page-title" vid="15">Our Philosophy</h1>
+        </header>
+
+        <div class="manifesto-intro" vid="16">
+            <p vid="17">A café designed for return, not noise.<br vid="18">
+            Da Vinci Coffee is built on a simple belief:<br vid="19">
+            the places we return to shape how we think, feel, and live.</p>
+            <br vid="20">
+            <p style="font-size: 1.2rem; font-style: italic; color: var(--color-rust);" vid="21">In a world of speed, stimulation, and excess choice, we chose restraint.</p>
+        </div>
+
+        <section vid="22">
+            <span class="section-number" vid="23">I.</span>
+            <div class="section-header" vid="24">
+                <h2 class="section-title" vid="25">That Calms the Mind</h2>
+                <div class="section-subtitle" vid="26">Every material, color, and sound in our space is chosen to reduce mental friction.</div>
+            </div>
+            <div class="content-block" vid="27">
+                <ul class="list-clean" vid="28">
+                    <li vid="29">Warm, natural tones instead of harsh contrasts</li>
+                    <li vid="30">Honest materials — wood, stone, linen — instead of gloss</li>
+                    <li vid="31">Soft lighting that follows the rhythm of the day</li>
+                </ul>
+                <div class="emphasis-block" vid="32">
+                    <p vid="33">The goal is not to impress at first glance,<br vid="34">but to feel right after the second visit.</p>
+                </div>
+                <p vid="35">A space that asks nothing of you — and therefore invites you back.</p>
+            </div>
+        </section>
+
+        <section vid="36">
+            <span class="section-number" vid="37">II.</span>
+            <div class="section-header" vid="38">
+                <h2 class="section-title" vid="39">Beauty Without Distraction</h2>
+                <div class="section-subtitle" vid="40">We believe beauty should support attention, not steal it.</div>
+            </div>
+            <div class="content-block" vid="41">
+                <p vid="42">There are no loud visuals, no unnecessary objects, no decorative excess. Each element exists for a reason.</p>
+                <ul class="list-clean" vid="43">
+                    <li vid="44">Engravings are subtle, not ornamental</li>
+                    <li vid="45">Art is integrated, not framed for attention</li>
+                    <li vid="46">Negative space is intentional</li>
+                </ul>
+                <p vid="47">This creates an environment where conversations linger, thoughts slow down, and time stretches naturally.</p>
+            </div>
+        </section>
+
+        <section vid="48">
+            <span class="section-number" vid="49">III.</span>
+            <div class="section-header" vid="50">
+                <h2 class="section-title" vid="51">Around Human Rhythm</h2>
+                <div class="section-subtitle" vid="52">Our café follows how people actually move through a day.</div>
+            </div>
+            <div class="content-block" vid="53">
+                <ul class="list-clean" vid="54">
+                    <li vid="55">Calm mornings for clarity</li>
+                    <li vid="56">Focused afternoons for sustained work</li>
+                    <li vid="57">Quiet hours designed for thinking</li>
+                    <li vid="58">Evenings that gently slow the pace</li>
+                </ul>
+                <p vid="59">We don't chase constant energy. We respect natural mental cycles. This is why the space feels familiar — even on your first visit.</p>
+            </div>
+        </section>
+
+        <section vid="60">
+            <span class="section-number" vid="61">IV.</span>
+            <div class="section-header" vid="62">
+                <h2 class="section-title" vid="63">Ritual Over Novelty</h2>
+                <div class="section-subtitle" vid="64">Most cafés are built for discovery. We are built for return.</div>
+            </div>
+            <div class="content-block" vid="65">
+                <p vid="66">Instead of rotating chaos, we offer gentle consistency:</p>
+                <ul class="list-clean" vid="67">
+                    <li vid="68">Familiar layouts</li>
+                    <li vid="69">Predictable comfort</li>
+                    <li vid="70">Quiet rituals that repeat</li>
+                </ul>
+                <p vid="71">That rewards time, not urgency. Because habits form where people feel safe.</p>
+            </div>
+        </section>
+
+        <section vid="72">
+            <span class="section-number" vid="73">V.</span>
+            <div class="section-header" vid="74">
+                <h2 class="section-title" vid="75">A Space That Listens</h2>
+                <div class="section-subtitle" vid="76">Da Vinci Coffee is not designed to dominate your attention. It is designed to step back.</div>
+            </div>
+            <div class="content-block" vid="77">
+                <p vid="78">To listen to:</p>
+                <ul class="list-clean" vid="79">
+                    <li vid="80">Conversations</li>
+                    <li vid="81">Books being read</li>
+                    <li vid="82">Ideas forming</li>
+                    <li vid="83">Pauses between thoughts</li>
+                </ul>
+                <div class="emphasis-block" vid="84">
+                    <p vid="85">The highest compliment to our design is silence —<br vid="86">the kind that feels full, not empty.</p>
+                </div>
+            </div>
+        </section>
+
+        <section vid="87">
+            <span class="section-number" vid="88">VI.</span>
+            <div class="section-header" vid="89">
+                <h2 class="section-title" vid="90">Modern, But Timeless</h2>
+                <div class="section-subtitle" vid="91">We draw inspiration from Renaissance thinking.</div>
+            </div>
+            <div class="content-block" vid="92">
+                <ul class="list-clean" vid="93">
+                    <li vid="94">Balance</li>
+                    <li vid="95">Proportion</li>
+                    <li vid="96">Human scale</li>
+                    <li vid="97">Purpose over excess</li>
+                </ul>
+                <p vid="98">We avoid trends that age quickly. It is meant to feel relevant years from now — not just today.</p>
+            </div>
+        </section>
+
+        <section vid="99">
+            <span class="section-number" vid="100">VII.</span>
+            <div class="section-header" vid="101">
+                <h2 class="section-title" vid="102">Why This Matters</h2>
+                <div class="section-subtitle" vid="103">A café is not just a place to drink coffee.</div>
+            </div>
+            <div class="content-block" vid="104">
+                <p vid="105">It becomes part of someone's morning, part of their thinking process, part of their routine. Our philosophy respects that responsibility.</p>
+                <p vid="106">We don't try to be everything. We try to be the place you come back to.</p>
+            </div>
+        </section>
+
+        <footer vid="107">
+            <div class="footer-logo" vid="108">Da Vinci Coffee</div>
+            <div class="footer-tagline" vid="109">For thought. Built for return.</div>
+        </footer>
+
+    </main>
+
+    <script vid="110">
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body></html>
