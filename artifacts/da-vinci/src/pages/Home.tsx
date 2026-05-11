@@ -339,52 +339,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Room Section */}
+      {/* Room Section - Minimal & Atmospheric */}
       <section
         id="room"
-        className="relative scroll-mt-24 w-full min-h-[75svh] md:min-h-[88svh] flex flex-col items-center justify-end md:justify-center overflow-hidden bg-black pb-16 md:pb-0"
+        className="relative scroll-mt-24 w-full min-h-[90vh] md:min-h-[95vh] overflow-hidden bg-espresso-deep"
         aria-label="The room"
       >
-        <div className="absolute inset-0 z-0 bg-overlay-ink" />
-        {roomVideoOk ? (
-          <video
-            className="absolute inset-0 z-[1] w-full h-full object-cover opacity-[0.58]"
-            autoPlay={!reduce}
-            muted
-            loop
-            playsInline
-            poster="/experience-poster.svg"
-            onError={onRoomVideoError}
-          >
-            <source src="/experience-video.mp4" type="video/mp4" />
-          </video>
-        ) : null}
-        <div
-          className="absolute inset-0 z-[2] bg-gradient-to-t from-black via-black/46 to-black/24"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 z-[3] bg-gradient-to-br from-black/14 via-transparent to-black/32 pointer-events-none"
-          aria-hidden
-        />
+        {/* Full-bleed Background with slower, cinematic feel */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1600&q=80"
+            alt="Cafe interior"
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-espresso-deep via-espresso-deep/80 to-espresso-deep/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-espresso-deep/60 via-transparent to-espresso-deep/60" />
+        </div>
 
-        <motion.div
-          className="relative z-20 flex flex-col items-center text-center section-x max-w-3xl mx-auto md:mt-0"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeUpVariant}
-        >
-          <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-serif text-cream font-light leading-tight tracking-display"
-            data-testid="text-experience"
+        {/* Ambient Glow - Warmth visualization */}
+        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 3, ease: EASE_LUXE }}
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
+            style={{ background: "radial-gradient(ellipse at center, rgba(200, 132, 26, 0.12) 0%, transparent 70%)" }}
+          />
+        </div>
+
+        {/* Content - Centered and Minimal */}
+        <div className="relative z-10 min-h-[90vh] md:min-h-[95vh] flex items-center justify-center">
+          <motion.div
+            className="text-center section-x max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
           >
-            A quieter room. Softer service.
-          </h2>
-          <p className="mt-5 md:mt-6 text-sm md:text-base font-sans font-light text-cream/58 max-w-md leading-relaxed">
-            Warm surfaces, low chatter—the cup isn&apos;t competing for your attention.
-          </p>
-        </motion.div>
+            {/* Label */}
+            <motion.p 
+              variants={fadeUpVariant}
+              className="text-[0.6875rem] tracking-[0.32em] uppercase text-amber-accent/60 mb-10 md:mb-12 font-sans"
+            >
+              The room
+            </motion.p>
+
+            {/* Main Headline - Progressive reveal through opacity */}
+            <motion.h2 
+              variants={fadeUpVariant}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.08] text-cream tracking-display mb-6"
+            >
+              A quieter room.
+              <br />
+              <span className="text-cream/80">Softer service.</span>
+            </motion.h2>
+
+            {/* Minimal divider */}
+            <motion.div variants={fadeUpVariant} className="flex items-center justify-center gap-3 my-8">
+              <div className="w-8 h-px bg-cream/20" />
+              <div className="w-1 h-1 rounded-full bg-cream/30" />
+              <div className="w-8 h-px bg-cream/20" />
+            </motion.div>
+
+            {/* Closing line */}
+            <motion.p 
+              variants={fadeUpVariant}
+              className="font-sans text-base md:text-lg text-cream/50 tracking-wide"
+            >
+              Warm surfaces, low chatter.
+            </motion.p>
+          </motion.div>
+        </div>
       </section>
 
       {/* Study Section */}
