@@ -51,3 +51,6 @@ Thumbs.db
 # Secrets (e.g. Cloudflare API token for `pnpm run deploy:pages`)
 .env
 .env.*.local
+
+# Nested clone at repo root breaks Cloudflare Pages (git submodule update)
+/da-vinci-coffee/
