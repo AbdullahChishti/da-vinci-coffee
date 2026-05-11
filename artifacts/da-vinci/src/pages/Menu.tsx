@@ -1,4 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
+import { Link } from "wouter";
 
 const EASE_LUXE = [0.22, 0.1, 0.22, 1] as const;
 
@@ -6,11 +8,11 @@ function useMotionVariants() {
   const reduce = useReducedMotion();
 
   const fadeUpVariant = {
-    hidden: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 },
+    hidden: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: reduce ? 0 : 0.8, ease: EASE_LUXE },
+      transition: { duration: reduce ? 0 : 0.9, ease: EASE_LUXE },
     },
   };
 
@@ -22,7 +24,7 @@ function useMotionVariants() {
         ? { duration: 0 }
         : {
             staggerChildren: 0.1,
-            delayChildren: 0.05,
+            delayChildren: 0.08,
           },
     },
   };
@@ -34,35 +36,61 @@ interface MenuItemProps {
   name: string;
   price: string;
   description: string;
+  origin?: string;
 }
 
-function MenuItem({ name, price, description }: MenuItemProps) {
+function MenuItem({ name, price, description, origin }: MenuItemProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="group">
-      <div className="flex justify-between items-baseline mb-1">
-        <h3 className="font-serif text-xl md:text-[1.375rem] text-cream group-hover:text-cream/90 transition-colors duration-300">
+    <div
+      className="group py-6 border-b border-crema/[0.06] last:border-b-0"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="flex justify-between items-baseline mb-2">
+        <h3 className="font-display text-xl md:text-[1.375rem] text-crema font-light group-hover:text-crema/90 transition-colors duration-300">
           {name}
         </h3>
-        <span className="font-sans text-[0.9375rem] text-amber-accent/80">{price}</span>
+        <motion.span
+          className="font-sans text-[0.9375rem] text-amber-glow/70"
+          animate={{ x: isHovered ? -4 : 0 }}
+          transition={{ duration: 0.3, ease: EASE_LUXE }}
+        >
+          {price}
+        </motion.span>
       </div>
-      <p className="font-sans text-sm text-cream/50 group-hover:text-cream/60 transition-colors duration-300">
+      <p className="font-sans text-sm text-steam/50 group-hover:text-steam/65 transition-colors duration-300 leading-relaxed">
         {description}
       </p>
+      {origin && (
+        <p className="font-sans text-xs text-amber-glow/40 mt-2 tracking-wide">
+          {origin}
+        </p>
+      )}
     </div>
   );
 }
 
 interface MenuSectionProps {
   title: string;
+  subtitle?: string;
   items: MenuItemProps[];
   bgClass: string;
+  alignment?: "left" | "center" | "right";
 }
 
-function MenuSection({ title, items, bgClass }: MenuSectionProps) {
+function MenuSection({ title, subtitle, items, bgClass, alignment = "left" }: MenuSectionProps) {
   const { fadeUpVariant, staggerContainer } = useMotionVariants();
 
+  const alignmentClasses = {
+    left: "items-start text-left",
+    center: "items-center text-center",
+    right: "items-end text-right",
+  };
+
   return (
-    <section className={`py-16 md:py-20 section-x ${bgClass}`}>
+    <section className={`py-20 md:py-28 section-x ${bgClass}`}>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -70,14 +98,20 @@ function MenuSection({ title, items, bgClass }: MenuSectionProps) {
         variants={staggerContainer}
         className="max-w-4xl mx-auto"
       >
-        <motion.div variants={fadeUpVariant} className="mb-10 md:mb-12">
-          <p className="text-[0.6875rem] tracking-[0.32em] uppercase text-amber-accent/70 mb-3 font-sans">
-            {title}
-          </p>
-          <div className="w-16 h-px bg-amber-accent/30" />
+        <motion.div variants={fadeUpVariant} className={`flex flex-col ${alignmentClasses[alignment]} mb-12 md:mb-16`}>
+          <p className="text-label mb-3">{title}</p>
+          {subtitle && (
+            <p className="font-sans text-sm text-steam/50 max-w-md">
+              {subtitle}
+            </p>
+          )}
+          <div className={`flex items-center gap-4 mt-4 ${alignment === "center" ? "justify-center" : alignment === "right" ? "justify-end" : ""}`}>
+            <div className="w-12 h-[1px] bg-amber-glow/30" />
+            <div className="w-1.5 h-1.5 rounded-full bg-amber-glow/40" />
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0">
           {items.map((item, index) => (
             <motion.div key={index} variants={fadeUpVariant}>
               <MenuItem {...item} />
@@ -90,26 +124,33 @@ function MenuSection({ title, items, bgClass }: MenuSectionProps) {
 }
 
 const espressoItems: MenuItemProps[] = [
-  { name: "Espresso", price: "€3.50", description: "Single origin, pure intensity" },
-  { name: "Doppio", price: "€4.50", description: "Double shot, double pleasure" },
-  { name: "Macchiato", price: "€4.00", description: "Marked with a touch of foam" },
-  { name: "Cortado", price: "€4.50", description: "Equal parts coffee and warmth" },
-  { name: "Cappuccino", price: "€5.00", description: "Morning ritual perfected" },
-  { name: "Flat White", price: "€5.50", description: "Silky microfoam embrace" },
+  { name: "Espresso", price: "€3.50", description: "Single origin, pure intensity", origin: "Rotating selection" },
+  { name: "Doppio", price: "€4.50", description: "Double shot, full expression", origin: "Rotating selection" },
+  { name: "Macchiato", price: "€4.00", description: "Marked with a touch of foam", origin: "Traditional" },
+  { name: "Cortado", price: "€4.50", description: "Equal parts coffee and warmth", origin: "Spanish tradition" },
+  { name: "Cappuccino", price: "€5.00", description: "Morning ritual perfected", origin: "1:1:1 ratio" },
+  { name: "Flat White", price: "€5.50", description: "Silky microfoam embrace", origin: "Australian style" },
 ];
 
 const specialtyItems: MenuItemProps[] = [
-  { name: "Pour Over", price: "€6.00", description: "Hand-poured precision" },
-  { name: "Chemex", price: "€7.50", description: "Clean, bright, elegant" },
-  { name: "Cold Brew", price: "€5.50", description: "12-hour steeped smoothness" },
-  { name: "Nitro Cold Brew", price: "€6.50", description: "Cascading creaminess" },
+  { name: "Pour Over", price: "€6.00", description: "Hand-poured precision, single cup", origin: "V60 method" },
+  { name: "Chemex", price: "€7.50", description: "Clean, bright, elegant—serves two", origin: "Hourglass extraction" },
+  { name: "Cold Brew", price: "€5.50", description: "12-hour steeped smoothness", origin: "Slow extraction" },
+  { name: "Nitro Cold Brew", price: "€6.50", description: "Cascading creaminess on tap", origin: "Nitrogen-infused" },
 ];
 
 const pastryItems: MenuItemProps[] = [
-  { name: "Butter Croissant", price: "€4.00", description: "Flaky, golden, perfect" },
-  { name: "Pain au Chocolat", price: "€4.50", description: "Chocolate wrapped in butter" },
-  { name: "Tartine", price: "€6.00", description: "Sourdough, seasonal toppings" },
-  { name: "Seasonal Cake", price: "€7.00", description: "Ask your barista" },
+  { name: "Butter Croissant", price: "€4.00", description: "Flaky, golden, perfect", origin: "Daily from our baker" },
+  { name: "Pain au Chocolat", price: "€4.50", description: "Chocolate wrapped in butter", origin: "Daily from our baker" },
+  { name: "Tartine", price: "€6.00", description: "Sourdough, seasonal toppings", origin: "Changes weekly" },
+  { name: "Seasonal Cake", price: "€7.00", description: "Ask your barista for today's offering", origin: "Small batches" },
+];
+
+const alternativeItems: MenuItemProps[] = [
+  { name: "Oat Milk", price: "+€0.50", description: "Barista blend, creamy texture" },
+  { name: "Almond Milk", price: "+€0.50", description: "House-made, lightly sweet" },
+  { name: "Matcha", price: "€5.50", description: "Ceremonial grade, whisked to order", origin: "Uji, Japan" },
+  { name: "Hot Chocolate", price: "€5.00", description: "70% cacao, minimal sugar", origin: "Single origin cacao" },
 ];
 
 export default function Menu() {
@@ -117,18 +158,30 @@ export default function Menu() {
 
   return (
     <main className="flex flex-col w-full overflow-x-hidden bg-espresso">
-      {/* Hero Section */}
-      <section className="relative w-full min-h-[50vh] md:min-h-[55vh] flex items-center justify-center overflow-hidden">
+      {/* ============================================================
+          HERO SECTION - The Collection
+          ============================================================ */}
+      <section className="relative w-full min-h-[60vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 z-0">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=80')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-espresso/70 via-espresso/85 to-espresso" />
+        </div>
+
+        {/* Warm vignette */}
         <div
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-[1] pointer-events-none"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1080&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            background: "radial-gradient(ellipse at center, transparent 40%, rgba(13, 10, 8, 0.7) 100%)",
           }}
         />
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
 
         <motion.div
           className="relative z-20 flex flex-col items-center text-center section-x max-w-3xl mx-auto"
@@ -136,70 +189,254 @@ export default function Menu() {
           initial="hidden"
           animate="visible"
         >
+          <motion.p variants={fadeUpVariant} className="text-label mb-6">
+            The Collection
+          </motion.p>
+
           <motion.h1
             variants={fadeUpVariant}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif tracking-tight text-cream font-light mb-4"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-crema font-light mb-6"
           >
-            The Collection
+            What we serve
           </motion.h1>
-          <motion.p
-            variants={fadeUpVariant}
-            className="text-base md:text-lg font-serif text-cream/70 tracking-wide"
-          >
-            Every cup tells a story
+
+          <motion.div variants={fadeUpVariant} className="section-divider mb-8">
+            <span className="line" />
+            <span className="point" />
+            <span className="line" />
+          </motion.div>
+
+          <motion.p variants={fadeUpVariant} className="text-poetry max-w-md">
+            Every cup is a conversation between farmer, roaster, and barista.
           </motion.p>
         </motion.div>
       </section>
 
-      {/* Menu Sections */}
-      <MenuSection title="Espresso Classics" items={espressoItems} bgClass="bg-espresso" />
-      <MenuSection title="Specialty Brews" items={specialtyItems} bgClass="bg-espresso-deep" />
-      <MenuSection title="Pastry & Pairing" items={pastryItems} bgClass="bg-espresso-panel" />
+      {/* ============================================================
+          ESPRESSO CLASSICS
+          ============================================================ */}
+      <MenuSection
+        title="Espresso Classics"
+        subtitle="The foundation of our craft—precision-extracted, served with intention"
+        items={espressoItems}
+        bgClass="bg-espresso"
+      />
 
-      {/* Note Section */}
-      <section className="py-16 md:py-20 section-x bg-espresso-raised border-t border-cream/[0.06]">
+      {/* ============================================================
+          SPECIALTY BREWS
+          ============================================================ */}
+      <MenuSection
+        title="Specialty Brews"
+        subtitle="For those who want to taste the full story of the bean"
+        items={specialtyItems}
+        bgClass="bg-walnut"
+      />
+
+      {/* ============================================================
+          PASTRY & PAIRING
+          ============================================================ */}
+      <MenuSection
+        title="Pastry & Pairing"
+        subtitle="Made daily, served warm, best enjoyed slowly"
+        items={pastryItems}
+        bgClass="bg-espresso"
+      />
+
+      {/* ============================================================
+          ALTERNATIVES
+          ============================================================ */}
+      <section className="py-20 md:py-28 section-x bg-walnut border-t border-crema/[0.06]">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          variants={fadeUpVariant}
-          className="max-w-2xl mx-auto text-center"
+          variants={staggerContainer}
+          className="max-w-4xl mx-auto"
         >
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="w-8 h-px bg-cream/20" />
-            <div className="w-1.5 h-1.5 rounded-full bg-amber-accent/40" />
-            <div className="w-8 h-px bg-cream/20" />
+          <motion.div variants={fadeUpVariant} className="text-center mb-12">
+            <p className="text-label mb-3">Alternatives</p>
+            <p className="font-sans text-sm text-steam/50">For those who prefer a different path</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {alternativeItems.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={fadeUpVariant}
+                className="p-6 border border-crema/[0.06] hover:border-amber-glow/20 transition-colors duration-500"
+              >
+                <div className="flex justify-between items-baseline mb-2">
+                  <h3 className="font-display text-lg text-crema font-light">{item.name}</h3>
+                  <span className="font-sans text-sm text-amber-glow/70">{item.price}</span>
+                </div>
+                <p className="font-sans text-sm text-steam/50">{item.description}</p>
+                {item.origin && (
+                  <p className="font-sans text-xs text-amber-glow/40 mt-2">{item.origin}</p>
+                )}
+              </motion.div>
+            ))}
           </div>
-          <p className="font-sans text-sm text-cream/50 leading-relaxed">
-            All prices inclusive of service. Alternative milks available upon request.
-            <br />
-            Seasonal offerings rotate monthly—ask your barista for details.
-          </p>
         </motion.div>
       </section>
 
-      {/* Footer */}
-      <footer className="w-full py-12 md:py-14 section-x flex flex-col md:flex-row items-center justify-between gap-8 border-t border-cream/[0.08] bg-espresso-deep">
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <span className="text-lg font-serif text-cream/82">da vinci</span>
-          <span className="text-[0.6875rem] tracking-[0.16em] text-cream/48 font-sans uppercase">
-            Via Roma 42, Milano
-          </span>
-        </div>
-        <nav
-          className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[0.6875rem] tracking-[0.16em] uppercase font-sans text-cream/50"
-          aria-label="Footer"
+      {/* ============================================================
+          SEASONAL NOTE
+          ============================================================ */}
+      <section className="py-20 md:py-28 section-x bg-espresso border-t border-crema/[0.06]">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={staggerContainer}
+          className="max-w-3xl mx-auto"
         >
-          <a href="/" className="hover:text-cream/80 transition-colors duration-500">
-            Home
-          </a>
-          <a href="/philosophy" className="hover:text-cream/80 transition-colors duration-500">
-            Philosophy
-          </a>
-          <a href="mailto:hello@drinkdavinci.com" className="hover:text-cream/80 transition-colors duration-500">
-            Contact
-          </a>
-        </nav>
+          <motion.div variants={fadeUpVariant} className="text-center">
+            <div className="section-divider mb-8">
+              <span className="line" />
+              <span className="point" />
+              <span className="line" />
+            </div>
+
+            <p className="font-display text-xl text-crema/70 font-light italic mb-6">
+              &ldquo;The menu changes with the seasons, as coffee should.&rdquo;
+            </p>
+
+            <p className="font-sans text-sm text-steam/50 leading-relaxed max-w-lg mx-auto mb-8">
+              All prices inclusive of service. Alternative milks available upon request.
+              Our current single origin rotates monthly—ask your barista about what&apos;s in the grinder today.
+            </p>
+
+            <div className="flex items-center justify-center gap-8 text-label text-crema/40">
+              <span>Seasonal offerings</span>
+              <span className="w-1 h-1 rounded-full bg-amber-glow/30" />
+              <span>Ask your barista</span>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ============================================================
+          FEATURED ORIGIN
+          ============================================================ */}
+      <section className="relative w-full py-24 md:py-32 overflow-hidden bg-walnut">
+        <div className="relative z-10 section-x">
+          <motion.div
+            className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
+            {/* Image */}
+            <motion.div variants={fadeUpVariant} className="relative">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&q=80"
+                  alt="Coffee origin"
+                  className="object-cover w-full h-full opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-walnut/60 via-transparent to-transparent" />
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-full h-full border border-crema/[0.06] pointer-events-none" />
+            </motion.div>
+
+            {/* Content */}
+            <motion.div variants={fadeUpVariant}>
+              <p className="text-label mb-6">Current Selection</p>
+
+              <h2 className="font-display text-3xl md:text-4xl text-crema font-light mb-4">
+                Ethiopian Yirgacheffe
+              </h2>
+
+              <p className="font-sans text-sm text-amber-glow/60 tracking-wide mb-6">
+                Gedeo Zone · Washed Process · 2,000m elevation
+              </p>
+
+              <p className="font-sans text-base text-steam/60 leading-relaxed mb-6">
+                This lot arrives from a small cooperative in the highlands of southern Ethiopia.
+                Expect delicate florals, bright citrus, and a tea-like finish that lingers.
+              </p>
+
+              <div className="flex flex-wrap gap-4 mb-8">
+                {["Jasmine", "Lemon", "Black tea"].map((note) => (
+                  <span
+                    key={note}
+                    className="font-sans text-xs tracking-wide text-crema/50 px-3 py-1.5 border border-crema/[0.08]"
+                  >
+                    {note}
+                  </span>
+                ))}
+              </div>
+
+              <p className="font-display text-lg text-crema/70 italic">
+                &ldquo;Available as espresso or pour over—ask for a side-by-side comparison.&rdquo;
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          CTA SECTION
+          ============================================================ */}
+      <section className="py-20 md:py-28 section-x bg-espresso border-t border-crema/[0.06]">
+        <motion.div
+          className="max-w-3xl mx-auto text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            variants={fadeUpVariant}
+            className="font-display text-2xl sm:text-3xl text-crema font-light mb-8"
+          >
+            Visit us to experience the full collection
+          </motion.h2>
+
+          <motion.div variants={fadeUpVariant}>
+            <Link href="/#visit" className="btn-ritual">
+              Reserve your moment
+            </Link>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ============================================================
+          FOOTER
+          ============================================================ */}
+      <footer className="w-full py-12 md:py-16 section-x border-t border-crema/[0.06] bg-espresso">
+        <motion.div
+          className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <motion.div variants={fadeUpVariant} className="flex flex-col items-center md:items-start gap-2">
+            <span className="font-display text-lg text-crema/80">
+              <span className="font-light">da</span>
+              <span className="italic font-light ml-2">vinci</span>
+            </span>
+            <span className="text-label text-crema/40">Via Roma 42, Milano</span>
+          </motion.div>
+
+          <motion.nav
+            variants={fadeUpVariant}
+            className="flex flex-wrap justify-center gap-x-10 gap-y-3 text-label text-crema/40"
+            aria-label="Footer"
+          >
+            <Link href="/" className="hover:text-crema/70 transition-colors duration-500">
+              Entrance
+            </Link>
+            <Link href="/philosophy" className="hover:text-crema/70 transition-colors duration-500">
+              Philosophy
+            </Link>
+            <a href="mailto:hello@drinkdavinci.com" className="hover:text-crema/70 transition-colors duration-500">
+              Contact
+            </a>
+          </motion.nav>
+        </motion.div>
       </footer>
     </main>
   );

@@ -1,9 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+/* ============================================================
+   DA VINCI COFFEE - NEURO-MARKETING DESIGN SYSTEM
+   Emotional architecture for digital contemplation
+   ============================================================ */
+
+/* Cinematic Typography - Editorial, Warm, Sophisticated */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;450&family=Space+Grotesk:wght@300;400;500&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   COLOR PALETTE - Handcrafted Luxury
+   No pure black. No harsh white. Warm, aged, intentional.
+   ============================================================ */
 
 @theme inline {
   --color-background: hsl(var(--background));
@@ -40,105 +52,140 @@
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-destructive-border: var(--destructive-border);
 
-  --color-sidebar: hsl(var(--sidebar));
-  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
-  --color-sidebar-border: hsl(var(--sidebar-border));
-  --color-sidebar-primary: hsl(var(--sidebar-primary));
-  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
-  --color-sidebar-primary-border: var(--sidebar-primary-border);
-  --color-sidebar-accent: hsl(var(--sidebar-accent));
-  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
-  --color-sidebar-accent-border: var(--sidebar-accent-border);
-  --color-sidebar-ring: hsl(var(--sidebar-ring));
+  /* New Luxury Color System */
+  --color-crema: var(--crema);
+  --color-walnut: var(--walnut);
+  --color-espresso: var(--espresso);
+  --color-steam: var(--steam);
+  --color-amber-glow: var(--amber-glow);
+  --color-shadow: var(--shadow);
+  --color-clay: var(--clay);
+  --color-porcelain: var(--porcelain);
 
+  /* Legacy aliases for compatibility */
+  --color-cream: var(--crema);
+  --color-amber-accent: var(--amber-glow);
+  --color-espresso-deep: var(--shadow);
+  --color-espresso-raised: var(--espresso);
+  --color-espresso-panel: var(--walnut);
+  --color-espresso-near: var(--espresso);
+  --color-overlay-ink: var(--shadow);
+
+  /* Typography */
   --font-sans: var(--app-font-sans);
   --font-serif: var(--app-font-serif);
   --font-mono: var(--app-font-mono);
+  --font-display: var(--app-font-display);
+  --font-label: var(--app-font-label);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Luxury palette — use in pages via bg-espresso, text-cream/70, text-amber-accent/50, etc. */
-  --color-cream: var(--cream);
-  --color-espresso: var(--espresso);
-  --color-espresso-deep: var(--espresso-deep);
-  --color-espresso-raised: var(--espresso-raised);
-  --color-espresso-panel: var(--espresso-panel);
-  --color-espresso-near: var(--espresso-near);
-  --color-amber-accent: var(--amber-accent);
-  --color-overlay-ink: var(--overlay-ink);
+  /* Spacing Scale */
+  --spacing: 0.25rem;
+  --tracking-normal: 0em;
 }
 
-/* BASE (DARK ESPRESSO) — quieter accent, editorial contrast */
+/* ============================================================
+   ROOT VARIABLES - The Soul of the Experience
+   ============================================================ */
+
 :root {
-  --button-outline: rgba(255, 255, 255, 0.08);
-  --badge-outline: rgba(255, 255, 255, 0.04);
+  /* Handcrafted Luxury Palette */
+  --crema: #E8DCC4;
+  --walnut: #3D2B1F;
+  --espresso: #1A1410;
+  --steam: #B8A99A;
+  --amber-glow: #C4956A;
+  --shadow: #0D0A08;
+  --clay: #8B6F4E;
+  --porcelain: #F5F0E8;
 
+  /* Emotional Gradients */
+  --glow-subtle: rgba(196, 149, 106, 0.08);
+  --glow-warm: rgba(196, 149, 106, 0.15);
+  --glow-deep: rgba(196, 149, 106, 0.25);
+  --mist: rgba(184, 169, 154, 0.12);
+  --depth-shadow: rgba(13, 10, 8, 0.4);
+
+  /* Typography Stack */
+  --app-font-serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+  --app-font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --app-font-mono: "Space Grotesk", ui-monospace, monospace;
+  --app-font-display: "Cormorant Garamond", serif;
+  --app-font-label: "Space Grotesk", sans-serif;
+
+  /* Legacy Support */
+  --cream: var(--crema);
+  --amber-accent: var(--amber-glow);
+  --espresso-deep: var(--shadow);
+  --espresso-raised: var(--espresso);
+  --espresso-panel: var(--walnut);
+  --espresso-near: var(--espresso);
+  --overlay-ink: var(--shadow);
+
+  /* Component Theme */
+  --button-outline: rgba(232, 220, 196, 0.08);
+  --badge-outline: rgba(232, 220, 196, 0.04);
   --opaque-button-border-intensity: 9;
+  --elevate-1: rgba(232, 220, 196, 0.03);
+  --elevate-2: rgba(232, 220, 196, 0.07);
 
-  --elevate-1: rgba(255, 255, 255, 0.03);
-  --elevate-2: rgba(255, 255, 255, 0.07);
+  /* Core Theme Mapping */
+  --background: 20 25% 8%;
+  --foreground: 37 35% 84%;
+  --border: 25 20% 18%;
 
-  --background: 20 38% 7%;
-  --foreground: 35 30% 86%;
+  --card: 20 22% 10%;
+  --card-foreground: 37 35% 84%;
+  --card-border: 25 20% 18%;
 
-  --border: 20 18% 16%;
+  --sidebar: 20 25% 8%;
+  --sidebar-foreground: 37 35% 84%;
+  --sidebar-border: 25 20% 18%;
+  --sidebar-primary: 37 35% 84%;
+  --sidebar-primary-foreground: 20 25% 8%;
+  --sidebar-accent: 25 18% 14%;
+  --sidebar-accent-foreground: 37 35% 84%;
+  --sidebar-ring: 37 35% 84%;
 
-  --card: 20 28% 10%;
-  --card-foreground: 35 30% 86%;
-  --card-border: 20 18% 16%;
+  --popover: 20 22% 10%;
+  --popover-foreground: 37 35% 84%;
+  --popover-border: 25 20% 18%;
 
-  --sidebar: 20 38% 7%;
-  --sidebar-foreground: 35 30% 86%;
-  --sidebar-border: 20 18% 16%;
-  --sidebar-primary: 35 30% 86%;
-  --sidebar-primary-foreground: 20 38% 7%;
-  --sidebar-accent: 20 22% 13%;
-  --sidebar-accent-foreground: 35 30% 86%;
-  --sidebar-ring: 35 30% 86%;
+  --primary: 37 35% 84%;
+  --primary-foreground: 20 25% 8%;
 
-  --popover: 20 28% 10%;
-  --popover-foreground: 35 30% 86%;
-  --popover-border: 20 18% 16%;
+  --secondary: 25 18% 15%;
+  --secondary-foreground: 37 35% 84%;
 
-  --primary: 35 30% 86%;
-  --primary-foreground: 20 38% 7%;
+  --muted: 25 15% 14%;
+  --muted-foreground: 30 18% 56%;
 
-  --secondary: 20 22% 14%;
-  --secondary-foreground: 35 30% 86%;
+  --accent: 32 35% 52%;
+  --accent-foreground: 20 25% 8%;
 
-  --muted: 20 20% 12%;
-  --muted-foreground: 35 18% 56%;
-
-  --accent: 32 58% 42%;
-  --accent-foreground: 20 38% 7%;
-
-  --destructive: 0 62% 40%;
+  --destructive: 0 55% 40%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 20 18% 16%;
-  --ring: 35 30% 86%;
+  --input: 25 20% 18%;
+  --ring: 37 35% 84%;
 
-  --app-font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --app-font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --app-font-mono: ui-monospace, Menlo, monospace;
-
+  /* Geometry */
   --radius: 0rem;
 
-  --shadow-2xs: 0px 2px 0px 0px rgba(0, 0, 0, 0.3);
-  --shadow-xs: 0px 2px 0px 0px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 1px 2px -1px rgba(0, 0, 0, 0.3);
-  --shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 1px 2px -1px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --shadow-xl: 0px 2px 0px 0px rgba(0, 0, 0, 0.3), 0px 8px 10px -1px rgba(0, 0, 0, 0.3);
-  --shadow-2xl: 0px 2px 0px 0px rgba(0, 0, 0, 0.3);
+  /* Multi-layered Warm Shadows */
+  --shadow-2xs: 0 2px 4px -1px rgba(13, 10, 8, 0.15);
+  --shadow-xs: 0 4px 6px -1px rgba(13, 10, 8, 0.12);
+  --shadow-sm: 0 4px 12px -2px rgba(13, 10, 8, 0.15), 0 2px 4px -1px rgba(13, 10, 8, 0.08);
+  --shadow: 0 8px 24px -4px rgba(13, 10, 8, 0.18), 0 4px 8px -2px rgba(13, 10, 8, 0.1);
+  --shadow-md: 0 12px 32px -6px rgba(13, 10, 8, 0.22), 0 6px 12px -3px rgba(13, 10, 8, 0.12);
+  --shadow-lg: 0 20px 48px -8px rgba(13, 10, 8, 0.28), 0 10px 20px -5px rgba(13, 10, 8, 0.14);
+  --shadow-xl: 0 32px 64px -12px rgba(13, 10, 8, 0.32), 0 16px 32px -8px rgba(13, 10, 8, 0.16);
 
-  --tracking-normal: 0em;
-  --spacing: 0.25rem;
-
+  /* Border Colors */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-accent-border: hsl(var(--sidebar-accent));
   --primary-border: hsl(var(--primary));
@@ -147,99 +194,396 @@
   --accent-border: hsl(var(--accent));
   --destructive-border: hsl(var(--destructive));
 
-  --cream: #e8dccb;
-  --espresso: #120d08;
-  --espresso-deep: #0d0805;
-  --espresso-raised: #1a120c;
-  --espresso-panel: #161008;
-  --espresso-near: #14100a;
-  --amber-accent: #c8841a;
-  --overlay-ink: #080604;
+  /* Animation Timing */
+  --ease-luxe: cubic-bezier(0.22, 0.1, 0.22, 1);
+  --ease-contemplate: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-dramatic: cubic-bezier(0.87, 0, 0.13, 1);
+  --duration-slow: 1.2s;
+  --duration-medium: 0.8s;
+  --duration-quick: 0.4s;
 }
+
+/* ============================================================
+   UTILITY CLASSES - Cinematic Typography & Spacing
+   ============================================================ */
 
 @utility tracking-display {
   letter-spacing: -0.02em;
 }
 
+@utility tracking-wide-luxe {
+  letter-spacing: 0.12em;
+}
+
+@utility tracking-label {
+  letter-spacing: 0.2em;
+}
+
 @utility section-x {
-  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  padding-inline: clamp(1.25rem, 5vw, 3rem);
 }
 
-.dark {
-  --button-outline: rgba(255, 255, 255, 0.1);
-  --badge-outline: rgba(255, 255, 255, 0.05);
-
-  --opaque-button-border-intensity: 9;
-
-  --elevate-1: rgba(255, 255, 255, 0.04);
-  --elevate-2: rgba(255, 255, 255, 0.09);
-
-  --background: 19 16% 15%;
-  --foreground: 35 30% 86%;
-
-  --border: 19 16% 25%;
-
-  --card: 19 16% 18%;
-  --card-foreground: 35 30% 86%;
-  --card-border: 19 16% 25%;
-
-  --sidebar: 19 16% 15%;
-  --sidebar-foreground: 35 30% 86%;
-  --sidebar-border: 19 16% 25%;
-  --sidebar-primary: 35 30% 86%;
-  --sidebar-primary-foreground: 19 16% 15%;
-  --sidebar-accent: 19 16% 25%;
-  --sidebar-accent-foreground: 35 30% 86%;
-  --sidebar-ring: 35 30% 86%;
-
-  --popover: 19 16% 15%;
-  --popover-foreground: 35 30% 86%;
-  --popover-border: 19 16% 25%;
-
-  --primary: 35 30% 86%;
-  --primary-foreground: 19 16% 15%;
-
-  --secondary: 19 16% 25%;
-  --secondary-foreground: 35 30% 86%;
-
-  --muted: 19 16% 20%;
-  --muted-foreground: 35 18% 58%;
-
-  --accent: 19 16% 25%;
-  --accent-foreground: 35 30% 86%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 100%;
-
-  --input: 19 16% 25%;
-  --ring: 35 30% 86%;
-
-  --shadow-2xs: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  --shadow-xs: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
-  --shadow-sm: 0px 2px 0px 0px rgba(0, 0, 0, 0.2), 0px 1px 2px -1px rgba(0, 0, 0, 0.2);
-  --shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2), 0px 1px 2px -1px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0px 2px 0px 0px rgba(0, 0, 0, 0.2), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0px 2px 0px 0px rgba(0, 0, 0, 0.2), 0px 4px 6px -1px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0px 2px 0px 0px rgba(0, 0, 0, 0.2), 0px 8px 10px -1px rgba(0, 0, 0, 0.2);
-  --shadow-2xl: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+@utility text-balance {
+  text-wrap: balance;
 }
+
+@utility grain-overlay {
+  position: relative;
+}
+
+@utility grain-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ============================================================
+   BASE STYLES - The Foundation of Calm
+   ============================================================ */
 
 @layer base {
   * {
     @apply border-border;
   }
 
-  body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-primary selection:text-primary-foreground;
+  html {
+    scroll-behavior: auto; /* Lenis handles this */
   }
 
-  html {
-    scroll-behavior: smooth;
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--espresso);
+    color: var(--crema);
+    selection: {
+      background: var(--amber-glow);
+      color: var(--shadow);
+    }
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Editorial Typography Defaults */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-light tracking-tight;
+    line-height: 1.1;
+    color: var(--crema);
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+/* ============================================================
+   CUSTOM CURSOR - Subtle, Refined
+   ============================================================ */
+
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--amber-glow);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s var(--ease-luxe);
+}
+
+.custom-cursor.hovering {
+  transform: scale(3);
+  opacity: 0.6;
+}
+
+/* ============================================================
+   ATMOSPHERIC EFFECTS - Light, Shadow, Depth
+   ============================================================ */
+
+/* Ambient Glow */
+.ambient-glow {
+  position: absolute;
+  background: radial-gradient(ellipse at center, var(--glow-warm) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Warm Vignette */
+.warm-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(13, 10, 8, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Soft Edge Fade */
+.edge-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--espresso) 0%, transparent 15%, transparent 85%, var(--espresso) 100%);
+  pointer-events: none;
+}
+
+/* Glassmorphism - Premium, Subtle */
+.glass {
+  background: rgba(26, 20, 16, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(232, 220, 196, 0.08);
+}
+
+/* ============================================================
+   BUTTON SYSTEM - Intentional Interactions
+   ============================================================ */
+
+.btn-ritual {
+  @apply font-label text-[0.6875rem] tracking-label uppercase;
+  padding: 1rem 2rem;
+  border: 0.5px solid rgba(232, 220, 196, 0.25);
+  color: rgba(232, 220, 196, 0.88);
+  background: transparent;
+  transition: all 0.5s var(--ease-luxe);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ritual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(196, 149, 106, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-luxe);
+}
+
+.btn-ritual:hover {
+  border-color: rgba(232, 220, 196, 0.45);
+  color: var(--crema);
+  background: rgba(232, 220, 196, 0.05);
+}
+
+.btn-ritual:hover::before {
+  opacity: 1;
+}
+
+.btn-ghost {
+  @apply font-label text-[0.6875rem] tracking-label uppercase;
+  color: rgba(232, 220, 196, 0.55);
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-color: rgba(232, 220, 196, 0.15);
+  transition: all 0.4s var(--ease-luxe);
+}
+
+.btn-ghost:hover {
+  color: rgba(232, 220, 196, 0.85);
+  text-decoration-color: rgba(232, 220, 196, 0.35);
+}
+
+/* ============================================================
+   SECTION TRANSITIONS - Cinematic Flow
+   ============================================================ */
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.section-divider .line {
+  width: 3rem;
+  height: 0.5px;
+  background: rgba(232, 220, 196, 0.15);
+}
+
+.section-divider .point {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(196, 149, 106, 0.5);
+}
+
+/* Gradient Wipe Transitions */
+.gradient-wipe-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, var(--espresso) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.gradient-wipe-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, var(--espresso) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES - Editorial Hierarchy
+   ============================================================ */
+
+.hero-wordmark {
+  font-size: clamp(7rem, 24vw, 22rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.text-section {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.text-poetry {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: rgba(232, 220, 196, 0.75);
+}
+
+.text-label {
+  @apply font-label text-[0.6875rem] tracking-[0.25em] uppercase;
+  color: rgba(196, 149, 106, 0.7);
+}
+
+/* ============================================================
+   DARK MODE ADJUSTMENTS
+   ============================================================ */
+
+.dark {
+  --button-outline: rgba(232, 220, 196, 0.1);
+  --badge-outline: rgba(232, 220, 196, 0.05);
+  --opaque-button-border-intensity: 9;
+  --elevate-1: rgba(232, 220, 196, 0.04);
+  --elevate-2: rgba(232, 220, 196, 0.09);
+
+  --background: 20 20% 10%;
+  --foreground: 37 35% 84%;
+  --border: 25 18% 20%;
+
+  --card: 20 20% 12%;
+  --card-foreground: 37 35% 84%;
+  --card-border: 25 18% 20%;
+
+  --sidebar: 20 20% 10%;
+  --sidebar-foreground: 37 35% 84%;
+  --sidebar-border: 25 18% 20%;
+  --sidebar-primary: 37 35% 84%;
+  --sidebar-primary-foreground: 20 20% 10%;
+  --sidebar-accent: 25 15% 18%;
+  --sidebar-accent-foreground: 37 35% 84%;
+  --sidebar-ring: 37 35% 84%;
+
+  --popover: 20 20% 10%;
+  --popover-foreground: 37 35% 84%;
+  --popover-border: 25 18% 20%;
+
+  --primary: 37 35% 84%;
+  --primary-foreground: 20 20% 10%;
+
+  --secondary: 25 15% 18%;
+  --secondary-foreground: 37 35% 84%;
+
+  --muted: 25 12% 16%;
+  --muted-foreground: 30 16% 58%;
+
+  --accent: 32 30% 45%;
+  --accent-foreground: 20 20% 10%;
+
+  --destructive: 0 55% 35%;
+  --destructive-foreground: 0 0% 100%;
+
+  --input: 25 18% 20%;
+  --ring: 37 35% 84%;
+
+  --shadow-2xs: 0 2px 4px -1px rgba(13, 10, 8, 0.12);
+  --shadow-xs: 0 4px 6px -1px rgba(13, 10, 8, 0.1);
+  --shadow-sm: 0 4px 12px -2px rgba(13, 10, 8, 0.12);
+  --shadow: 0 8px 24px -4px rgba(13, 10, 8, 0.15);
+  --shadow-md: 0 12px 32px -6px rgba(13, 10, 8, 0.18);
+  --shadow-lg: 0 20px 48px -8px rgba(13, 10, 8, 0.22);
+  --shadow-xl: 0 32px 64px -12px rgba(13, 10, 8, 0.26);
+}
+
+/* ============================================================
+   ACCESSIBILITY - High Contrast Mode
+   ============================================================ */
+
+@media (prefers-contrast: high) {
+  :root {
+    --crema: #FFF8E7;
+    --steam: #D4C4B0;
+    --amber-glow: #E4B87A;
+  }
+
+  .btn-ritual {
+    border-width: 1px;
+    border-color: rgba(232, 220, 196, 0.5);
+  }
+}
+
+/* ============================================================
+   PRINT STYLES - Elegant Documentation
+   ============================================================ */
+
+@media print {
+  :root {
+    --espresso: #1a1a1a;
+    --crema: #333;
+    --amber-glow: #666;
+  }
+
+  .custom-cursor,
+  .ambient-glow,
+  .warm-vignette,
+  video {
+    display: none !important;
   }
 }
