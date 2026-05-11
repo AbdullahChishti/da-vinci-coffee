@@ -47,3 +47,6 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Nested clone at repo root breaks Cloudflare Pages (git submodule update)
+/da-vinci-coffee/
