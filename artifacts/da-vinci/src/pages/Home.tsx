@@ -98,7 +98,7 @@ export default function Home() {
             alt=""
             className="w-full h-full object-cover opacity-60"
             style={{
-              objectPosition: "85% 20%",
+              objectPosition: "85% 5%", /* Adjusted to be lower */
               filter: "sepia(15%) contrast(1.15) brightness(0.75)",
             }}
           />

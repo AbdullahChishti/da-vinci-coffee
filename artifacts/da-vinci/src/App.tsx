@@ -89,14 +89,14 @@ function Navigation() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 z-50 section-x"
+        className="fixed top-0 left-0 right-0 z-50 section-x pt-5 md:pt-6"
       initial={{ y: 0 }}
       animate={{ y: hidden ? -100 : 0 }}
       transition={{ duration: reduce ? 0 : 0.6, ease: EASE_LUXE }}
     >
       <div
-        className={`flex items-center justify-between py-5 md:py-6 transition-all duration-700 ${
-          scrolled ? "glass mt-4 mx-auto max-w-6xl rounded-sm" : "border-b border-crema/[0.06]"
+        className={`flex items-center justify-between transition-all duration-700 ${
+          scrolled ? "glass py-4 px-6 mx-auto max-w-6xl rounded-sm" : "py-5 md:py-6"
         }`}
       >
         {/* Logo */}
@@ -298,7 +298,7 @@ function App() {
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <div className="min-h-screen bg-espresso text-crema flex flex-col w-full overflow-x-hidden">
             <Navigation />
-            <main className="pt-[72px] md:pt-[88px]">
+            <main className="relative z-0">
               <Router />
             </main>
           </div>
