@@ -351,49 +351,105 @@ export default function Home() {
         />
 
         <div className="relative z-10 min-h-[100vh] flex items-center">
-          <div className="w-full section-x py-20 md:py-28">
-            <div className="max-w-7xl mx-auto">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={staggerContainer}
-              >
-                <div className="max-w-2xl">
-                  {/* Minimal Content to reveal Mona Lisa - left aligned */}
-                  <motion.div variants={fadeUpVariant}>
-                    <p className="text-label mb-6">In the cup</p>
-
-                    <h2 className="font-display text-3xl md:text-4xl text-crema mb-6 font-light">
-                      Small lots, tight bar.
-                    </h2>
-
-                    {/* Stats - compact */}
-                    <div className="flex gap-8 mb-8">
-                      <div>
-                        <p className="font-display text-2xl text-crema/90">12</p>
-                        <p className="text-label text-crema/40">Origins</p>
-                      </div>
-                      <div>
-                        <p className="font-display text-2xl text-crema/90">26s</p>
-                        <p className="text-label text-crema/40">Extraction</p>
-                      </div>
-                    </div>
-
-                    {/* CTA */}
-                    <motion.div variants={fadeUpVariant}>
-                      <a
-                        href="/menu"
-                        className="btn-ritual inline-flex items-center gap-3 group"
-                      >
-                        Explore
-                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-                      </a>
-                    </motion.div>
-                  </motion.div>
+          <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              {/* Section Label */}
+              <motion.div variants={fadeUpVariant} className="mb-8">
+                <p className="text-label mb-4">In the cup</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-[1px] bg-gradient-to-r from-crema/60 to-transparent" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-glow/50" />
                 </div>
               </motion.div>
-            </div>
+
+              {/* Content Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+                {/* Left: Main Message */}
+                <div className="lg:col-span-6">
+                  <motion.div variants={fadeUpVariant} className="space-y-3 mb-8">
+                    <span
+                      className="font-display text-espresso px-4 py-3 inline-block"
+                      style={{
+                        fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                        fontWeight: 300,
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.2,
+                        backgroundColor: "rgba(232, 220, 203, 0.95)",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      A mindful craft.
+                    </span>
+                    <br />
+                    <span
+                      className="font-display text-espresso px-4 py-3 inline-block italic"
+                      style={{
+                        fontSize: "clamp(2rem, 5vw, 3.5rem)",
+                        fontWeight: 200,
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.2,
+                        backgroundColor: "rgba(232, 220, 203, 0.9)",
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      For quiet moments.
+                    </span>
+                  </motion.div>
+
+                  <motion.p
+                    variants={fadeUpVariant}
+                    className="font-sans text-base md:text-lg text-steam/60 leading-relaxed max-w-sm mb-8"
+                  >
+                    Fewer beans. Better hands.
+                    <br />
+                    <span className="italic">Time in the cup.</span>
+                  </motion.p>
+
+                  <motion.div variants={fadeUpVariant}>
+                    <a
+                      href="/menu"
+                      className="btn-ritual inline-flex items-center gap-3 group"
+                    >
+                      Explore
+                      <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </a>
+                  </motion.div>
+                </div>
+
+                {/* Right: Stats Cards */}
+                <motion.div variants={fadeUpVariant} className="lg:col-span-6 lg:pt-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    {/* Origins Card */}
+                    <div className="bg-walnut/50 border border-crema/[0.08] px-6 py-6 text-center">
+                      <p className="font-display text-4xl md:text-5xl text-crema mb-2">12</p>
+                      <p className="text-label text-crema/50">Origins</p>
+                    </div>
+
+                    {/* Extraction Card */}
+                    <div className="bg-walnut/50 border border-crema/[0.08] px-6 py-6 text-center">
+                      <p className="font-display text-4xl md:text-5xl text-crema mb-2">26s</p>
+                      <p className="text-label text-crema/50">Extraction</p>
+                    </div>
+                  </div>
+
+                  {/* Intention Card - Full Width */}
+                  <div className="bg-espresso/60 border border-crema/[0.06] px-6 py-5 mt-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-display text-xl text-crema/90 italic">One intention.</p>
+                        <p className="text-label text-crema/40 mt-1">The cup stays center stage.</p>
+                      </div>
+                      <div className="w-2 h-2 rounded-full bg-amber-glow/40" />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
