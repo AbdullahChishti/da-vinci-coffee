@@ -1,7 +1,6 @@
 import { useReducedMotion } from "framer-motion";
 import { motion } from "framer-motion";
-import { useCallback, useState, type ReactNode } from "react";
-import { Link } from "wouter";
+import { useCallback, useState } from "react";
 
 const EASE_LUXE = [0.22, 0.1, 0.22, 1] as const;
 
@@ -12,11 +11,11 @@ function useMotionVariants() {
   const reduce = useReducedMotion();
 
   const fadeUpVariant = {
-    hidden: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 },
+    hidden: reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: reduce ? 0 : 0.9, ease: EASE_LUXE },
+      transition: { duration: reduce ? 0 : 1, ease: EASE_LUXE },
     },
   };
 
@@ -27,8 +26,8 @@ function useMotionVariants() {
       transition: reduce
         ? { duration: 0 }
         : {
-            staggerChildren: 0.22,
-            delayChildren: 0.06,
+            staggerChildren: 0.18,
+            delayChildren: 0.1,
           },
     },
   };
@@ -36,53 +35,21 @@ function useMotionVariants() {
   return { fadeUpVariant, staggerContainer, reduce };
 }
 
-function NavLink({ href, children }: { href: string; children: ReactNode }) {
-  return (
-    <a
-      href={href}
-      className="font-sans text-[0.6875rem] tracking-[0.2em] uppercase text-cream/60 hover:text-cream/90 transition-colors duration-500"
-    >
-      {children}
-    </a>
-  );
-}
-
 export default function Home() {
   const { fadeUpVariant, staggerContainer, reduce } = useMotionVariants();
   const [heroVideoOk, setHeroVideoOk] = useState(true);
   const [roomVideoOk, setRoomVideoOk] = useState(true);
   const [visitVideoOk, setVisitVideoOk] = useState(true);
-  const [coffeeImgOk, setCoffeeImgOk] = useState(true);
 
   const onHeroVideoError = useCallback(() => setHeroVideoOk(false), []);
   const onRoomVideoError = useCallback(() => setRoomVideoOk(false), []);
   const onVisitVideoError = useCallback(() => setVisitVideoOk(false), []);
-  const onCoffeeImgError = useCallback(() => setCoffeeImgOk(false), []);
 
   return (
-    <main className="min-h-screen bg-background text-foreground flex flex-col w-full overflow-x-hidden">
-      <header
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between section-x pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 md:py-5 border-b border-cream/[0.08] bg-espresso/75 backdrop-blur-md"
-        style={{ paddingRight: "max(1.25rem, env(safe-area-inset-right))" }}
-      >
-        <Link
-          href="/"
-          className="font-serif text-lg md:text-xl text-cream/85 tracking-tight hover:text-cream transition-colors duration-500"
-          aria-label="da vinci — home"
-        >
-          da vinci
-        </Link>
-        <nav className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 md:gap-x-10" aria-label="Primary">
-          <NavLink href="#ritual">How we work</NavLink>
-          <NavLink href="#coffee">Coffee</NavLink>
-          <NavLink href="#room">The Room</NavLink>
-          <NavLink href="#study">Study</NavLink>
-          <NavLink href="#visit">Visit</NavLink>
-        </nav>
-      </header>
-
+    <main className="flex flex-col w-full overflow-x-hidden">
+      {/* Hero Section */}
       <section
-        className="relative w-full min-h-[88svh] md:min-h-[92svh] flex items-center justify-center overflow-hidden pt-20"
+        className="relative w-full min-h-[88svh] md:min-h-[92svh] flex items-center justify-center overflow-hidden"
         aria-label="Hero"
       >
         <div
@@ -142,7 +109,7 @@ export default function Home() {
           >
             <a
               href="#visit"
-              className="font-sans text-[0.6875rem] tracking-[0.2em] uppercase px-8 py-3.5 border border-cream/35 text-cream/88 hover:border-cream/55 hover:text-cream transition-colors duration-500"
+              className="font-sans text-[0.6875rem] tracking-[0.2em] uppercase px-8 py-3.5 border border-cream/35 text-cream/88 hover:border-cream/55 hover:text-cream hover:bg-cream/5 transition-all duration-500"
             >
               Opening
             </a>
@@ -156,128 +123,223 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Ritual Section - Minimal with Psychology Hooks */}
       <section
         id="ritual"
-        className="relative scroll-mt-24 w-full min-h-[72vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden bg-espresso-raised"
+        className="relative scroll-mt-24 w-full min-h-[85vh] md:min-h-[90vh] overflow-hidden bg-espresso-raised"
+        aria-label="How we work"
       >
-        <div
-          className="absolute inset-0 opacity-[0.025] pointer-events-none"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-            backgroundSize: "200px",
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 w-[min(100vw,520px)] h-[min(100vw,520px)] rounded-full opacity-[0.07] pointer-events-none -translate-x-1/4 translate-y-1/4"
-          style={{ background: "radial-gradient(circle, var(--amber-accent) 0%, transparent 70%)" }}
-        />
+        {/* Atmospheric Background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=80"
+            alt="Coffee atmosphere"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-espresso-raised via-espresso-raised/95 to-espresso-raised" />
+        </div>
 
-        <motion.div
-          className="relative z-10 max-w-2xl mx-auto text-center section-x py-24 md:py-36"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={fadeUpVariant}
-        >
-          <p className="text-[0.6875rem] tracking-[0.32em] uppercase text-cream/45 mb-8 md:mb-10 font-sans">
-            How we work
-          </p>
-          <p
-            className="text-3xl sm:text-4xl md:text-5xl font-serif font-light leading-[1.2] text-cream tracking-display"
-            data-testid="text-concept"
-          >
-            We light the room for the first sip.
-          </p>
-          <div className="flex items-center justify-center gap-4 my-8 md:my-10">
-            <div className="w-10 h-px bg-amber-accent/40" />
-            <div className="w-1 h-1 rounded-full bg-amber-accent/50" />
-            <div className="w-10 h-px bg-amber-accent/40" />
-          </div>
-          <p className="text-sm md:text-base font-sans font-light text-cream/58 leading-relaxed max-w-md mx-auto">
-            Low sound, human pace—the cup stays center stage.
-          </p>
-        </motion.div>
-      </section>
-
-      <section
-        id="coffee"
-        className="relative scroll-mt-24 w-full py-24 md:py-32 section-x overflow-hidden bg-espresso-panel"
-        aria-label="Coffee"
-      >
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-            backgroundSize: "200px",
-          }}
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute top-1/2 right-0 w-[min(100vw,28rem)] h-[min(100vw,28rem)] -translate-y-1/2 translate-x-1/3 rounded-full opacity-[0.05]"
-          style={{ background: "radial-gradient(circle, var(--amber-accent) 0%, transparent 68%)" }}
-          aria-hidden
-        />
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 lg:gap-24 items-center relative z-10">
+        {/* Single Floating Light Orb */}
+        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
           <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 2.5, ease: EASE_LUXE }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(200, 132, 26, 0.08) 0%, transparent 60%)" }}
+          />
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-10 min-h-[85vh] md:min-h-[90vh] flex items-center justify-center">
+          <motion.div
+            className="text-center section-x max-w-3xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUpVariant}
-            className="order-2 md:order-1"
+            variants={staggerContainer}
           >
-            <h2
-              className="text-[0.6875rem] tracking-[0.32em] uppercase text-amber-accent/55 mb-8 md:mb-10 font-sans"
-              data-testid="text-coffee-subtitle"
+            {/* Section Label */}
+            <motion.p 
+              variants={fadeUpVariant} 
+              className="text-[0.6875rem] tracking-[0.32em] uppercase text-amber-accent/70 mb-12 md:mb-16 font-sans"
             >
-              In the cup
-            </h2>
-            <p className="text-2xl sm:text-3xl md:text-[2rem] lg:text-4xl font-serif leading-[1.28] md:leading-[1.32] text-cream mb-8 md:mb-10 max-w-xl tracking-display">
-              Small lots, tight bar—shots that land clean and finish quiet.
-            </p>
-            <div className="flex items-center gap-4 mb-0 max-w-md">
-              <div className="h-px flex-1 bg-cream/12" />
-              <div className="w-1 h-1 rounded-full bg-amber-accent/45 shrink-0" />
-              <div className="h-px w-12 bg-cream/12 shrink-0" />
-            </div>
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUpVariant}
-            className="order-1 md:order-2 w-full aspect-[3/4] md:aspect-[4/5] max-md:max-w-[min(100%,22.5rem)] max-md:mx-auto relative overflow-hidden bg-espresso-deep ring-1 ring-cream/[0.07]"
-          >
-            {coffeeImgOk ? (
-              <img
-                src="/coffee-image.svg"
-                alt="Espresso pour at da vinci"
-                className="object-cover w-full h-full"
-                loading="lazy"
-                data-testid="img-coffee"
-                onError={onCoffeeImgError}
-              />
-            ) : (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                role="img"
-                aria-label="Coffee — visual placeholder"
-              >
-                <div
-                  className="w-3/5 h-3/5 rounded-full opacity-40"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--cream) 14%, transparent) 0%, transparent 50%), radial-gradient(circle at 60% 55%, color-mix(in srgb, var(--amber-accent) 18%, transparent) 0%, transparent 40%)",
-                  }}
-                />
-              </div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/28 to-transparent pointer-events-none" />
+              How we work
+            </motion.p>
+
+            {/* Main Headline */}
+            <motion.h2 
+              variants={fadeUpVariant}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-light leading-[1.1] text-cream tracking-display mb-8"
+            >
+              We light the room
+              <br />
+              <span className="text-cream/70">for the first sip.</span>
+            </motion.h2>
+
+            {/* Divider */}
+            <motion.div variants={fadeUpVariant} className="flex items-center justify-center gap-4 my-10 md:my-12">
+              <div className="w-12 h-px bg-cream/15" />
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-accent/50" />
+              <div className="w-12 h-px bg-cream/15" />
+            </motion.div>
+
+            {/* Three Pillars - Minimal */}
+            <motion.div variants={fadeUpVariant} className="flex flex-wrap justify-center gap-x-12 gap-y-4 mb-12">
+              <span className="font-sans text-sm text-cream/50">Warm light</span>
+              <span className="font-sans text-sm text-cream/30">·</span>
+              <span className="font-sans text-sm text-cream/50">Low sound</span>
+              <span className="font-sans text-sm text-cream/30">·</span>
+              <span className="font-sans text-sm text-cream/50">Human pace</span>
+            </motion.div>
+
+            {/* Closing Statement */}
+            <motion.p 
+              variants={fadeUpVariant}
+              className="font-serif text-xl md:text-2xl text-cream/80 font-light tracking-display"
+            >
+              The cup stays center stage.
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
+      {/* Coffee Section - REDESIGNED */}
+      <section
+        id="coffee"
+        className="relative scroll-mt-24 w-full min-h-[90vh] md:min-h-[95vh] overflow-hidden bg-espresso-panel"
+        aria-label="Coffee"
+      >
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1600&q=80"
+            alt="Coffee preparation"
+            className="w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-espresso-panel via-espresso-panel/90 to-espresso-panel/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-espresso-panel via-transparent to-espresso-panel/30" />
+        </div>
+
+        {/* Decorative Elements */}
+        <div
+          className="absolute top-1/4 right-0 w-[min(60vw,500px)] h-[min(60vw,500px)] rounded-full opacity-[0.08] pointer-events-none translate-x-1/3"
+          style={{ background: "radial-gradient(circle, var(--amber-accent) 0%, transparent 70%)" }}
+        />
+
+        <div className="relative z-10 min-h-[90vh] md:min-h-[95vh] flex items-center">
+          <div className="w-full section-x py-20 md:py-28">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={staggerContainer}
+              >
+                {/* Section Label */}
+                <motion.div variants={fadeUpVariant} className="mb-8 md:mb-12">
+                  <p className="text-[0.6875rem] tracking-[0.32em] uppercase text-amber-accent/70 mb-4 font-sans">
+                    In the cup
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-px bg-amber-accent/40" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-accent/50" />
+                  </div>
+                </motion.div>
+
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                  {/* Text Content */}
+                  <motion.div variants={fadeUpVariant} className="lg:col-span-7">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-serif font-light leading-[1.15] text-cream mb-8 tracking-display">
+                      Small lots, tight bar—
+                      <br />
+                      <span className="text-cream/80">shots that land clean</span>
+                      <br />
+                      <span className="text-cream/60">and finish quiet.</span>
+                    </h2>
+
+                    <div className="flex items-center gap-6 mb-8">
+                      <div className="h-px flex-1 max-w-[120px] bg-cream/15" />
+                      <div className="w-2 h-2 rounded-full bg-amber-accent/40" />
+                      <div className="h-px w-24 bg-cream/15" />
+                    </div>
+
+                    <p className="font-sans text-base md:text-lg text-cream/55 leading-relaxed max-w-xl mb-10">
+                      Single-origin beans, precision roasting, and careful extraction. 
+                      We work with small farms and local roasters who share our attention to detail.
+                    </p>
+
+                    {/* Stats/Details */}
+                    <div className="grid grid-cols-3 gap-6 max-w-lg">
+                      <div className="border-l border-cream/10 pl-4">
+                        <p className="font-serif text-2xl md:text-3xl text-cream/90 mb-1">12+</p>
+                        <p className="font-sans text-[0.65rem] tracking-[0.2em] uppercase text-cream/40">Origins</p>
+                      </div>
+                      <div className="border-l border-cream/10 pl-4">
+                        <p className="font-serif text-2xl md:text-3xl text-cream/90 mb-1">Daily</p>
+                        <p className="font-sans text-[0.65rem] tracking-[0.2em] uppercase text-cream/40">Roasted</p>
+                      </div>
+                      <div className="border-l border-cream/10 pl-4">
+                        <p className="font-serif text-2xl md:text-3xl text-cream/90 mb-1">26s</p>
+                        <p className="font-sans text-[0.65rem] tracking-[0.2em] uppercase text-cream/40">Extraction</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Featured Image */}
+                  <motion.div
+                    variants={fadeUpVariant}
+                    className="lg:col-span-5 relative"
+                  >
+                    <div className="relative aspect-[3/4] overflow-hidden bg-espresso-deep ring-1 ring-cream/[0.08]">
+                      <img
+                        src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&q=80"
+                        alt="Espresso pour"
+                        className="object-cover w-full h-full opacity-80 hover:opacity-90 transition-opacity duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-espresso-panel/80 via-transparent to-transparent" />
+                      
+                      {/* Floating Label */}
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <p className="font-sans text-[0.65rem] tracking-[0.25em] uppercase text-cream/50 mb-2">
+                          Featured
+                        </p>
+                        <p className="font-serif text-lg text-cream/90">
+                          Ethiopian Single Origin
+                        </p>
+                        <p className="font-sans text-sm text-cream/50 mt-1">
+                          Floral · Citrus · Clean finish
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Decorative frame */}
+                    <div className="absolute -top-4 -right-4 w-full h-full border border-cream/[0.06] pointer-events-none" />
+                  </motion.div>
+                </div>
+
+                {/* Bottom CTA */}
+                <motion.div variants={fadeUpVariant} className="mt-16 md:mt-20 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                  <a
+                    href="/menu"
+                    className="group inline-flex items-center gap-3 font-sans text-[0.6875rem] tracking-[0.2em] uppercase px-8 py-4 border border-cream/30 text-cream/80 hover:border-cream/50 hover:text-cream hover:bg-cream/5 transition-all duration-500"
+                  >
+                    View Full Menu
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                  </a>
+                  <p className="font-sans text-sm text-cream/40">
+                    Rotating selection of single origins and blends
+                  </p>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Room Section */}
       <section
         id="room"
         className="relative scroll-mt-24 w-full min-h-[75svh] md:min-h-[88svh] flex flex-col items-center justify-end md:justify-center overflow-hidden bg-black pb-16 md:pb-0"
@@ -325,6 +387,7 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Study Section */}
       <section
         id="study"
         className="relative scroll-mt-24 w-full py-24 md:py-36 section-x flex flex-col items-center justify-center overflow-hidden bg-espresso-near"
@@ -373,7 +436,7 @@ export default function Home() {
           <motion.div variants={fadeUpVariant}>
             <a
               href={MAIL_STUDY}
-              className="inline-flex font-sans text-[0.6875rem] tracking-[0.2em] uppercase px-10 py-3.5 border border-cream/30 text-cream/82 hover:border-cream/48 hover:text-cream transition-colors duration-500"
+              className="inline-flex font-sans text-[0.6875rem] tracking-[0.2em] uppercase px-10 py-3.5 border border-cream/30 text-cream/82 hover:border-cream/48 hover:text-cream hover:bg-cream/5 transition-all duration-500"
               data-testid="button-join-study"
             >
               Request by email
@@ -382,6 +445,7 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Visit Section */}
       <section
         id="visit"
         className="relative scroll-mt-24 w-full min-h-[min(32rem,78svh)] md:min-h-[min(36rem,72svh)] overflow-hidden border-t border-cream/[0.08]"
@@ -431,7 +495,7 @@ export default function Home() {
               </p>
               <a
                 href={MAIL_OPENING}
-                className="inline-flex font-sans text-[0.6875rem] tracking-[0.2em] uppercase px-8 py-3.5 border border-cream/38 text-cream/90 bg-espresso/40 backdrop-blur-[2px] hover:border-cream/55 hover:text-cream transition-colors duration-500"
+                className="inline-flex font-sans text-[0.6875rem] tracking-[0.2em] uppercase px-8 py-3.5 border border-cream/38 text-cream/90 bg-espresso/40 backdrop-blur-[2px] hover:border-cream/55 hover:text-cream hover:bg-cream/5 transition-all duration-500"
               >
                 Email for details
               </a>
@@ -462,6 +526,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="w-full py-12 md:py-14 section-x flex flex-col md:flex-row items-center justify-between gap-8 border-t border-cream/[0.08] bg-espresso-deep">
         <div className="flex flex-col items-center md:items-start gap-2">
           <span className="text-lg font-serif text-cream/82" data-testid="text-footer-brand">
